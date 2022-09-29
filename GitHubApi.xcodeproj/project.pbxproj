@@ -12,10 +12,12 @@
 		AF418BD528E48D33002F4C4D /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418BD428E48D33002F4C4D /* UserSession.swift */; };
 		AF418BFA28E4ADC8002F4C4D /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418BF928E4ADC8002F4C4D /* RepositoriesViewController.swift */; };
 		AF418BFD28E4FF15002F4C4D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418BFC28E4FF15002F4C4D /* NetworkService.swift */; };
-		AF418BFF28E4FF6A002F4C4D /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418BFE28E4FF6A002F4C4D /* Repositories.swift */; };
+		AF418BFF28E4FF6A002F4C4D /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418BFE28E4FF6A002F4C4D /* Repository.swift */; };
 		AF418C0128E59C6B002F4C4D /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C0028E59C6B002F4C4D /* Items.swift */; };
 		AF418C0328E59DC7002F4C4D /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C0228E59DC7002F4C4D /* Owner.swift */; };
 		AF418C0528E5ADF3002F4C4D /* RepositoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C0428E5ADF3002F4C4D /* RepositoriesView.swift */; };
+		AF418C0A28E5C0ED002F4C4D /* RepositriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C0928E5C0ED002F4C4D /* RepositriesCell.swift */; };
+		AF418C0D28E5CB5D002F4C4D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AF418C0C28E5CB5D002F4C4D /* Kingfisher */; };
 		AF9A17CB28E45428009B2645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A17CA28E45428009B2645 /* AppDelegate.swift */; };
 		AF9A17CF28E45428009B2645 /* GitHubLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */; };
 		AF9A17D428E45429009B2645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF9A17D328E45429009B2645 /* Assets.xcassets */; };
@@ -27,10 +29,11 @@
 		AF418BD428E48D33002F4C4D /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		AF418BF928E4ADC8002F4C4D /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		AF418BFC28E4FF15002F4C4D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		AF418BFE28E4FF6A002F4C4D /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
+		AF418BFE28E4FF6A002F4C4D /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		AF418C0028E59C6B002F4C4D /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		AF418C0228E59DC7002F4C4D /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		AF418C0428E5ADF3002F4C4D /* RepositoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesView.swift; sourceTree = "<group>"; };
+		AF418C0928E5C0ED002F4C4D /* RepositriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositriesCell.swift; sourceTree = "<group>"; };
 		AF9A17C728E45428009B2645 /* GitHubApi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubApi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A17CA28E45428009B2645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginVC.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF418C0D28E5CB5D002F4C4D /* Kingfisher in Frameworks */,
 				AF418BCD28E45584002F4C4D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,10 +76,8 @@
 		AF418BD028E48698002F4C4D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */,
-				AF418BD128E48B65002F4C4D /* LoginView.swift */,
-				AF418BF928E4ADC8002F4C4D /* RepositoriesViewController.swift */,
-				AF418C0428E5ADF3002F4C4D /* RepositoriesView.swift */,
+				AF418C0628E5C085002F4C4D /* Login */,
+				AF418C0728E5C093002F4C4D /* Repositories */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -85,7 +87,7 @@
 			children = (
 				AF418BD428E48D33002F4C4D /* UserSession.swift */,
 				AF418C0028E59C6B002F4C4D /* Items.swift */,
-				AF418BFE28E4FF6A002F4C4D /* Repositories.swift */,
+				AF418BFE28E4FF6A002F4C4D /* Repository.swift */,
 				AF418C0228E59DC7002F4C4D /* Owner.swift */,
 			);
 			path = Model;
@@ -97,6 +99,33 @@
 				AF418BFC28E4FF15002F4C4D /* NetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		AF418C0628E5C085002F4C4D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */,
+				AF418BD128E48B65002F4C4D /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AF418C0728E5C093002F4C4D /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AF418C0828E5C0D2002F4C4D /* Cell */,
+				AF418BF928E4ADC8002F4C4D /* RepositoriesViewController.swift */,
+				AF418C0428E5ADF3002F4C4D /* RepositoriesView.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AF418C0828E5C0D2002F4C4D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AF418C0928E5C0ED002F4C4D /* RepositriesCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		AF9A17BE28E45428009B2645 = {
@@ -145,6 +174,7 @@
 			name = GitHubApi;
 			packageProductDependencies = (
 				AF418BCC28E45584002F4C4D /* SnapKit */,
+				AF418C0C28E5CB5D002F4C4D /* Kingfisher */,
 			);
 			productName = GitHubApi;
 			productReference = AF9A17C728E45428009B2645 /* GitHubApi.app */;
@@ -176,6 +206,7 @@
 			mainGroup = AF9A17BE28E45428009B2645;
 			packageReferences = (
 				AF418BCB28E45584002F4C4D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AF418C0B28E5CB5D002F4C4D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = AF9A17C828E45428009B2645 /* Products */;
 			projectDirPath = "";
@@ -204,13 +235,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF418C0128E59C6B002F4C4D /* Items.swift in Sources */,
-				AF418BFF28E4FF6A002F4C4D /* Repositories.swift in Sources */,
+				AF418BFF28E4FF6A002F4C4D /* Repository.swift in Sources */,
 				AF418BD228E48B65002F4C4D /* LoginView.swift in Sources */,
 				AF418BFA28E4ADC8002F4C4D /* RepositoriesViewController.swift in Sources */,
 				AF418C0328E59DC7002F4C4D /* Owner.swift in Sources */,
 				AF9A17CF28E45428009B2645 /* GitHubLoginVC.swift in Sources */,
 				AF9A17CB28E45428009B2645 /* AppDelegate.swift in Sources */,
 				AF418BFD28E4FF15002F4C4D /* NetworkService.swift in Sources */,
+				AF418C0A28E5C0ED002F4C4D /* RepositriesCell.swift in Sources */,
 				AF418C0528E5ADF3002F4C4D /* RepositoriesView.swift in Sources */,
 				AF418BD528E48D33002F4C4D /* UserSession.swift in Sources */,
 			);
@@ -432,6 +464,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		AF418C0B28E5CB5D002F4C4D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -439,6 +479,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF418BCB28E45584002F4C4D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		AF418C0C28E5CB5D002F4C4D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF418C0B28E5CB5D002F4C4D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

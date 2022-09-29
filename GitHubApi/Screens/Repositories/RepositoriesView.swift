@@ -14,11 +14,10 @@ class RepositoriesView: UIView {
         return searchBar
     }()
     
-   private(set) lazy var tableView: UITableView = {
+    private(set) lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 72.0
         tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 0.0)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isHidden = true
         return tableView
     }()
@@ -32,8 +31,6 @@ class RepositoriesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     private func configureUI() {
         self.backgroundColor = .white
         self.addSubview(searchBar)
@@ -43,7 +40,7 @@ class RepositoriesView: UIView {
         
         self.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.searchBar.snp.bottomMargin)
+            make.top.equalTo(searchBar.snp.bottom).inset(5)
             make.bottom.left.right.equalToSuperview()
         }
     }

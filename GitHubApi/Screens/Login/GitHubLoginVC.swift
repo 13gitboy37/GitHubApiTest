@@ -10,10 +10,10 @@ import WebKit
 import SnapKit
 
 final class GitHubLoginVC: UIViewController {
-    var webView: WKWebView = {
-        let webView = WKWebView(frame: .zero)
-        return webView
-    } ()
+    
+    private var loginView: LoginView {
+        return view as! LoginView
+    }
     
     private var urlComponents: URLComponents = {
         var comp = URLComponents()
@@ -26,22 +26,19 @@ final class GitHubLoginVC: UIViewController {
         return comp
     }()
     
-    private func configureUI() {
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(webView)
-        webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+    override func loadView() {
+        super.loadView()
+        self.view = LoginView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
-        configureUI()
+        loginView.webView.navigationDelegate = self
+        
         guard
             let url = urlComponents.url
         else { return }
-        webView.load(URLRequest(url: url))
+        loginView.webView.load(URLRequest(url: url))
         
     }
 }

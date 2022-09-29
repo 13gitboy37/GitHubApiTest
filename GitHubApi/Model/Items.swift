@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Items {
-    let items: [Repository]
+    let items: [Repository]?
 }
 
 extension Items: Codable {
