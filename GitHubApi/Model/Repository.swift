@@ -11,6 +11,7 @@ struct Repository {
     let name: String
     let owner: Owner
     let language: String?
+    let htmlUrl: String
 }
 
 extension Repository: Codable {
@@ -18,5 +19,6 @@ extension Repository: Codable {
         case name
         case owner
         case language
+        case htmlUrl = "html_url"
     }
 }

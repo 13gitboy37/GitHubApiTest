@@ -73,25 +73,13 @@ class RepositriesCell: UITableViewCell {
         }
         
         nameRepoLabel.snp.makeConstraints { make in
-            make.left.equalTo(avatarImage.snp.right).inset(-20)
+            make.left.equalTo(avatarImage.snp.right).offset(20)
             make.top.equalTo(contentView).inset(10)
         }
         
         nameLanguageLabel.snp.makeConstraints { make in
-            make.left.equalTo(avatarImage.snp.right).inset(-20)
+            make.left.equalTo(avatarImage.snp.right).offset(20)
             make.top.equalTo(nameRepoLabel).inset(25)
         }
     }
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()    }
-//
-//
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
 }

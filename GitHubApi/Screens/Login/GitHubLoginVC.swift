@@ -77,10 +77,12 @@ extension GitHubLoginVC: WKNavigationDelegate {
                 case .success(let accessToken):
                     UserSession.instance.token = accessToken
                     DispatchQueue.main.async {
-                        let repositoriesViewController = RepositoriesViewController()
+                        
+                        let repositoriesViewController = RepositoriesBuilder.build()
                         repositoriesViewController.modalPresentationStyle = .fullScreen
                         self.present(repositoriesViewController, animated: true)
                     }
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

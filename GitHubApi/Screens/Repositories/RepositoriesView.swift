@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+
+
 class RepositoriesView: UIView {
     private(set) lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -18,7 +20,6 @@ class RepositoriesView: UIView {
         let tableView = UITableView()
         tableView.rowHeight = 72.0
         tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 12.0, bottom: 0.0, right: 0.0)
-        tableView.isHidden = true
         return tableView
     }()
     
