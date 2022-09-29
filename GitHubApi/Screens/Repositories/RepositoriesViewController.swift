@@ -7,22 +7,21 @@
 
 import UIKit
 
+protocol RepositoriesViewProtocol: AnyObject {
+    func showRepositories(repositories: [Repository])
+}
+
 class RepositoriesViewController: UIViewController {
     
-    private let networkService = NetworkService()
+    //MARK: Properties
+    
+    var presenter: RepositoriesPresenterProtocol?
     
     private var timer = Timer()
-    
-    private var isLoading: Bool = false
-    
-    private var searchText = ""
-    
-    private var countPageForSearch = 0
     
     private var repositories = [Repository]() {
         didSet {
             DispatchQueue.main.async {
-                self.repositoriesView.tableView.isHidden = false
                 self.repositoriesView.tableView.reloadData()
             }
         }
@@ -32,6 +31,8 @@ class RepositoriesViewController: UIViewController {
         return view as! RepositoriesView
     }
     
+    //MARK: Lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = RepositoriesView()
@@ -39,7 +40,6 @@ class RepositoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         repositoriesView.tableView.delegate = self
         repositoriesView.tableView.dataSource = self
         repositoriesView.searchBar.delegate = self
@@ -49,20 +49,38 @@ class RepositoriesViewController: UIViewController {
                                             forCellReuseIdentifier: "reuseId")
         
     }
+    
+    //MARK: Methods
+    
+    private func setAlertController() {
+        let alertController = UIAlertController(
+            title:
+                "No results",
+            message:
+                "No repositories found. Enter your request again.",
+            preferredStyle: .alert)
+        
+        let alertOK = UIAlertAction(title: "OK", style: .cancel)
+        alertController.addAction(alertOK)
+        present(alertController, animated: true, completion: nil)
+    }
 }
+
+
+//MARK: Table View Delegate and Data Source
 
 extension RepositoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(1)
+        self.presenter?.openSafari(url: "\(repositories[indexPath.row].htmlUrl)")
     }
 }
 
 extension RepositoriesViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
-//        1
+        repositories.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let currentRepo = repositories[indexPath.row]
@@ -78,46 +96,40 @@ extension RepositoriesViewController: UITableViewDataSource {
     }
 }
 
+//MARK: Prefetching
+
 extension RepositoriesViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
-        guard let maxRow = indexPaths.map({ $0.row }).max() else { return }
-        
-        if maxRow > repositories.count - 3, !isLoading {
-            isLoading = true
-            self.countPageForSearch += 1
-            networkService.searchRepos(searchText: self.searchText, page: "\(self.countPageForSearch)") { result in
-                switch result {
-                case .success(let repos):
-                    
-                    self.repositories.append(contentsOf: repos.items ?? [])
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        isLoading = false
+        self.presenter?.startPrefetching(indexPaths: indexPaths, repositoriesCount: repositories.count)
     }
-    }
-    
-    
+}
+
+//MARK: Search Bar Delegate
 
 extension RepositoriesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        self.countPageForSearch = 1
-        self.searchText = searchText
         timer.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
             
-            self.networkService.searchRepos(searchText: searchText, page: "\(self.countPageForSearch)") { result in
-                switch result {
-                case .success(let repos):
-                    self.repositories = repos.items ?? []
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            if !searchText.isEmpty {
+                self.presenter?.textDidChanged(searchText: searchText)
+            } else {
+                self.repositories = []
             }
         })
+    }
+}
+
+extension RepositoriesViewController: RepositoriesViewProtocol {
+    
+    func showRepositories(repositories: [Repository]) {
+        DispatchQueue.main.async {
+            self.repositories.append(contentsOf: repositories)
+            if repositories.isEmpty {
+                self.setAlertController()
+            }
+        }
     }
 }
