@@ -68,6 +68,7 @@ final class NetworkService {
     }
     
     func searchRepos(searchText: String,
+                     page: String,
                      completion: @escaping (Result<Items,Error>) -> Void) {
         
         //            https://api.github.com/search/repositories?q=repo&per_page=2&page=1
@@ -76,7 +77,7 @@ final class NetworkService {
         urlConstructor.queryItems = [
             URLQueryItem(name: "q", value: searchText),
             URLQueryItem(name: "per_page", value: "20"),
-            URLQueryItem(name: "page", value: "1")
+            URLQueryItem(name: "page", value: page)
         ]
         guard
             let url = urlConstructor.url
