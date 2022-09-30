@@ -6,17 +6,28 @@
 //
 
 import Foundation
+import UIKit
 
 protocol RepositoriesPresenterProtocol: AnyObject {
     
+    var repositories: [Repository] { get set }
     func textDidChanged(searchText: String)
-    func startPrefetching(indexPaths: [IndexPath], repositoriesCount: Int)
+    func startPrefetching(indexPaths: [IndexPath])
     func didLoadRepositories(repositories: [Repository])
-    func openSafari(url: String)
+    func numberOfRows() -> Int
+    func setCell(_ tableView: UITableView,
+                 cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func openSafari(indexPath: IndexPath)
     
 }
 
 class RepositoriesPresenter {
+    
+    var repositories: [Repository] = [] {
+        didSet {
+            repositoriesView?.reloadTableView()
+        }
+    }
     
     weak var repositoriesView: RepositoriesViewProtocol?
     var router: RepositoriesRouterProtocol
@@ -31,19 +42,47 @@ class RepositoriesPresenter {
 
 extension RepositoriesPresenter: RepositoriesPresenterProtocol {
     
-    func textDidChanged(searchText: String) {
-        interactor.loadRepositories(text: searchText)
+    func numberOfRows() -> Int {
+        repositories.count
     }
     
-    func startPrefetching(indexPaths: [IndexPath], repositoriesCount: Int) {
-        interactor.loadRepositoriesForPrefatching(indexPaths: indexPaths, repositoriesCount: repositoriesCount)
+    func setCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: "reuseId", for: indexPath)
+        
+        let currentRepo = repositories[indexPath.row]
+        
+        guard
+            let cell = dequeuedCell as? RepositriesCell
+        else { return UITableViewCell()}
+        
+        cell.configure(with: currentRepo)
+        return cell
+    }
+    
+    func textDidChanged(searchText: String) {
+        if searchText.isEmpty {
+            repositories = []
+        } else {
+            interactor.loadRepositories(text: searchText)
+        }
+    }
+    
+    func startPrefetching(indexPaths: [IndexPath]) {
+        interactor.loadRepositoriesForPrefatching(indexPaths: indexPaths)
     }
     
     func didLoadRepositories(repositories: [Repository]) {
-        repositoriesView?.showRepositories(repositories: repositories)
+        if repositories.isEmpty {
+            DispatchQueue.main.async {
+                self.repositoriesView?.setAlertController()
+            }
+        } else {
+            self.repositories.append(contentsOf: repositories)
+        }
     }
     
-    func openSafari(url: String) {
-        router.openSafari(url: url)
+    func openSafari(indexPath: IndexPath) {
+        router.openSafari(url: repositories[indexPath.row].htmlUrl)
     }
 }

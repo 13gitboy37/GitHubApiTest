@@ -15,12 +15,14 @@ protocol GitHubLoginViewProtocol: AnyObject {
 
 final class GitHubLoginViewController: UIViewController {
     
+    //MARK: Properties
     var presenter: GitHubLoginPresenterProtocol?
-    
+  
     private var loginView: LoginView {
         return view as! LoginView
     }
     
+    //MARK: Lifecucle
     override func loadView() {
         super.loadView()
         self.view = LoginView()
@@ -33,6 +35,7 @@ final class GitHubLoginViewController: UIViewController {
     }
 }
 
+//MARK: WebViewDelegate
 extension GitHubLoginViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
@@ -43,6 +46,7 @@ extension GitHubLoginViewController: WKNavigationDelegate {
         }
 }
 
+//MARK: Release GitHubLoginProtocol
 extension GitHubLoginViewController: GitHubLoginViewProtocol {
     
     func loadWebView(URLRequest: URLRequest) {
