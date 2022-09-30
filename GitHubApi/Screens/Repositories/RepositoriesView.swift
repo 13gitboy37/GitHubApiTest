@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class RepositoriesView: UIView {
+    
     private(set) lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         return searchBar

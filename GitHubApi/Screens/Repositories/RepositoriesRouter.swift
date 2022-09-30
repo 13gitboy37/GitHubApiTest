@@ -8,7 +8,9 @@
 import UIKit
 
 protocol RepositoriesRouterProtocol: AnyObject {
+    
     func openSafari(url: String)
+    
 }
 
 class RepositoriesRouter: RepositoriesRouterProtocol {

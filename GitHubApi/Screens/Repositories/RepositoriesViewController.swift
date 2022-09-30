@@ -8,7 +8,8 @@
 import UIKit
 
 protocol RepositoriesViewProtocol: AnyObject {
-    func showRepositories(repositories: [Repository])
+    func reloadTableView()
+    func setAlertController()
 }
 
 class RepositoriesViewController: UIViewController {
@@ -18,14 +19,6 @@ class RepositoriesViewController: UIViewController {
     var presenter: RepositoriesPresenterProtocol?
     
     private var timer = Timer()
-    
-    private var repositories = [Repository]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.repositoriesView.tableView.reloadData()
-            }
-        }
-    }
     
     private var repositoriesView: RepositoriesView {
         return view as! RepositoriesView
@@ -47,12 +40,11 @@ class RepositoriesViewController: UIViewController {
         
         repositoriesView.tableView.register(RepositriesCell.self,
                                             forCellReuseIdentifier: "reuseId")
-        
     }
     
     //MARK: Methods
     
-    private func setAlertController() {
+    func setAlertController() {
         let alertController = UIAlertController(
             title:
                 "No results",
@@ -71,28 +63,18 @@ class RepositoriesViewController: UIViewController {
 
 extension RepositoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter?.openSafari(url: "\(repositories[indexPath.row].htmlUrl)")
+        self.presenter?.openSafari(indexPath: indexPath)
     }
 }
 
 extension RepositoriesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        repositories.count
+        self.presenter?.numberOfRows() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let currentRepo = repositories[indexPath.row]
-        
-        let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: "reuseId", for: indexPath)
-        
-        guard let cell = dequeuedCell as? RepositriesCell else {
-            return dequeuedCell
-        }
-        
-        cell.configure(with: currentRepo)
-        return cell
+        presenter?.setCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
 }
 
@@ -100,8 +82,7 @@ extension RepositoriesViewController: UITableViewDataSource {
 
 extension RepositoriesViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-        self.presenter?.startPrefetching(indexPaths: indexPaths, repositoriesCount: repositories.count)
+        self.presenter?.startPrefetching(indexPaths: indexPaths)
     }
 }
 
@@ -112,24 +93,17 @@ extension RepositoriesViewController: UISearchBarDelegate {
         
         timer.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-            
-            if !searchText.isEmpty {
-                self.presenter?.textDidChanged(searchText: searchText)
-            } else {
-                self.repositories = []
-            }
+            self.presenter?.textDidChanged(searchText: searchText)
         })
     }
 }
 
+//MARK: Release RepositoriesViewProtocol
+
 extension RepositoriesViewController: RepositoriesViewProtocol {
-    
-    func showRepositories(repositories: [Repository]) {
+    func reloadTableView() {
         DispatchQueue.main.async {
-            self.repositories.append(contentsOf: repositories)
-            if repositories.isEmpty {
-                self.setAlertController()
-            }
+            self.repositoriesView.tableView.reloadData()
         }
     }
 }
