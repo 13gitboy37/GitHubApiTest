@@ -22,8 +22,12 @@
 		AF418C1128E60295002F4C4D /* RepositoriesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1028E60295002F4C4D /* RepositoriesRouter.swift */; };
 		AF418C1328E60340002F4C4D /* RepositoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1228E60340002F4C4D /* RepositoriesInteractor.swift */; };
 		AF418C1528E604A0002F4C4D /* RepositoriesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1428E604A0002F4C4D /* RepositoriesModuleBuilder.swift */; };
+		AF418C1728E63EF9002F4C4D /* GitHubLoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1628E63EF9002F4C4D /* GitHubLoginInteractor.swift */; };
+		AF418C1928E63F17002F4C4D /* GitHuLoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1828E63F17002F4C4D /* GitHuLoginRouter.swift */; };
+		AF418C1B28E63F2D002F4C4D /* GitHubLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1A28E63F2D002F4C4D /* GitHubLoginPresenter.swift */; };
+		AF418C1D28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418C1C28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift */; };
 		AF9A17CB28E45428009B2645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A17CA28E45428009B2645 /* AppDelegate.swift */; };
-		AF9A17CF28E45428009B2645 /* GitHubLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */; };
+		AF9A17CF28E45428009B2645 /* GitHubLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A17CE28E45428009B2645 /* GitHubLoginViewController.swift */; };
 		AF9A17D428E45429009B2645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF9A17D328E45429009B2645 /* Assets.xcassets */; };
 		AF9A17D728E45429009B2645 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9A17D528E45429009B2645 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -42,9 +46,13 @@
 		AF418C1028E60295002F4C4D /* RepositoriesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesRouter.swift; sourceTree = "<group>"; };
 		AF418C1228E60340002F4C4D /* RepositoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesInteractor.swift; sourceTree = "<group>"; };
 		AF418C1428E604A0002F4C4D /* RepositoriesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesModuleBuilder.swift; sourceTree = "<group>"; };
+		AF418C1628E63EF9002F4C4D /* GitHubLoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginInteractor.swift; sourceTree = "<group>"; };
+		AF418C1828E63F17002F4C4D /* GitHuLoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHuLoginRouter.swift; sourceTree = "<group>"; };
+		AF418C1A28E63F2D002F4C4D /* GitHubLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginPresenter.swift; sourceTree = "<group>"; };
+		AF418C1C28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginModuleBuilder.swift; sourceTree = "<group>"; };
 		AF9A17C728E45428009B2645 /* GitHubApi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubApi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A17CA28E45428009B2645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginVC.swift; sourceTree = "<group>"; };
+		AF9A17CE28E45428009B2645 /* GitHubLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginViewController.swift; sourceTree = "<group>"; };
 		AF9A17D328E45429009B2645 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF9A17D628E45429009B2645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF9A17D828E45429009B2645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,8 +120,12 @@
 		AF418C0628E5C085002F4C4D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				AF9A17CE28E45428009B2645 /* GitHubLoginVC.swift */,
+				AF9A17CE28E45428009B2645 /* GitHubLoginViewController.swift */,
 				AF418BD128E48B65002F4C4D /* LoginView.swift */,
+				AF418C1628E63EF9002F4C4D /* GitHubLoginInteractor.swift */,
+				AF418C1828E63F17002F4C4D /* GitHuLoginRouter.swift */,
+				AF418C1A28E63F2D002F4C4D /* GitHubLoginPresenter.swift */,
+				AF418C1C28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -248,17 +260,21 @@
 			files = (
 				AF418C0128E59C6B002F4C4D /* Items.swift in Sources */,
 				AF418BFF28E4FF6A002F4C4D /* Repository.swift in Sources */,
+				AF418C1928E63F17002F4C4D /* GitHuLoginRouter.swift in Sources */,
 				AF418BD228E48B65002F4C4D /* LoginView.swift in Sources */,
 				AF418C1128E60295002F4C4D /* RepositoriesRouter.swift in Sources */,
+				AF418C1B28E63F2D002F4C4D /* GitHubLoginPresenter.swift in Sources */,
 				AF418BFA28E4ADC8002F4C4D /* RepositoriesViewController.swift in Sources */,
+				AF418C1D28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift in Sources */,
 				AF418C0328E59DC7002F4C4D /* Owner.swift in Sources */,
-				AF9A17CF28E45428009B2645 /* GitHubLoginVC.swift in Sources */,
+				AF9A17CF28E45428009B2645 /* GitHubLoginViewController.swift in Sources */,
 				AF9A17CB28E45428009B2645 /* AppDelegate.swift in Sources */,
 				AF418C1328E60340002F4C4D /* RepositoriesInteractor.swift in Sources */,
 				AF418BFD28E4FF15002F4C4D /* NetworkService.swift in Sources */,
 				AF418C0A28E5C0ED002F4C4D /* RepositriesCell.swift in Sources */,
 				AF418C0528E5ADF3002F4C4D /* RepositoriesView.swift in Sources */,
 				AF418C1528E604A0002F4C4D /* RepositoriesModuleBuilder.swift in Sources */,
+				AF418C1728E63EF9002F4C4D /* GitHubLoginInteractor.swift in Sources */,
 				AF418C0F28E60116002F4C4D /* RepositoriesPresenter.swift in Sources */,
 				AF418BD528E48D33002F4C4D /* UserSession.swift in Sources */,
 			);

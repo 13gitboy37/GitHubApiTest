@@ -12,13 +12,13 @@ protocol RepositoriesRouterProtocol: AnyObject {
 }
 
 class RepositoriesRouter: RepositoriesRouterProtocol {
+    
+    weak var viewController: RepositoriesViewController?
+    
     func openSafari(url: String) {
         guard
             let url = URL(string: "\(url)")
         else { return }
         UIApplication.shared.open(url)
     }
-    
-    weak var viewController: RepositoriesViewController?
-    
 }

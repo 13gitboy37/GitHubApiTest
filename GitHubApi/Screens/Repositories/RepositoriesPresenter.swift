@@ -16,8 +16,8 @@ protocol RepositoriesPresenterProtocol: AnyObject {
     
 }
 
-
 class RepositoriesPresenter {
+    
     weak var repositoriesView: RepositoriesViewProtocol?
     var router: RepositoriesRouterProtocol
     var interactor: RepositoriesInteractorProtocol
