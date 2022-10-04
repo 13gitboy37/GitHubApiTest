@@ -61,11 +61,8 @@ extension RepositoriesPresenter: RepositoriesPresenterProtocol {
     }
     
     func textDidChanged(searchText: String) {
-        if searchText.isEmpty {
             repositories = []
-        } else {
             interactor.loadRepositories(text: searchText)
-        }
     }
     
     func startPrefetching(indexPaths: [IndexPath]) {

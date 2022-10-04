@@ -122,9 +122,9 @@
 			children = (
 				AF9A17CE28E45428009B2645 /* GitHubLoginViewController.swift */,
 				AF418BD128E48B65002F4C4D /* LoginView.swift */,
+				AF418C1A28E63F2D002F4C4D /* GitHubLoginPresenter.swift */,
 				AF418C1628E63EF9002F4C4D /* GitHubLoginInteractor.swift */,
 				AF418C1828E63F17002F4C4D /* GitHuLoginRouter.swift */,
-				AF418C1A28E63F2D002F4C4D /* GitHubLoginPresenter.swift */,
 				AF418C1C28E63F67002F4C4D /* GitHubLoginModuleBuilder.swift */,
 			);
 			path = Login;
@@ -345,7 +345,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = /Users/nikitamosencev/Documents/GeekBrains/GitHubApiTest/GitHubApi/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -400,7 +400,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = /Users/nikitamosencev/Documents/GeekBrains/GitHubApiTest/GitHubApi/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

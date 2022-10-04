@@ -21,6 +21,4 @@ class GitHubLoginRouter: GitHubLoginRouterProtocol {
         
         self.viewController?.presentRepositoriesView(viewController: repositoriesViewController)
     }
-    
-    
 }

@@ -43,13 +43,7 @@ class RepositoriesInteractor: RepositoriesInteractorProtocol {
             case .success(let repos):
                 
                 guard let repositories = repos.items else { return }
-                
-                if !text.isEmpty {
-                    self?.repositories = repositories
-                } else {
-                    self?.repositories = []
-                }
-                
+                            
                 self?.presenter?.didLoadRepositories(repositories: repositories)
                 
             case .failure(let error):

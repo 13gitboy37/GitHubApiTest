@@ -17,12 +17,12 @@ final class GitHubLoginViewController: UIViewController {
     
     //MARK: Properties
     var presenter: GitHubLoginPresenterProtocol?
-  
+    
     private var loginView: LoginView {
         return view as! LoginView
     }
     
-    //MARK: Lifecucle
+    //MARK: Lifecycle
     override func loadView() {
         super.loadView()
         self.view = LoginView()
@@ -40,11 +40,19 @@ extension GitHubLoginViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationResponse: WKNavigationResponse,
-        decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {            
+        decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
             self.presenter?.startExchangeAccessToken(with: navigationResponse)
-            decisionHandler(.cancel)
+            
+            guard let cancelWebView = presenter?.cancelNavigationWebView
+                else { return }
+            if cancelWebView {
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
         }
 }
+
 
 //MARK: Release GitHubLoginProtocol
 extension GitHubLoginViewController: GitHubLoginViewProtocol {
