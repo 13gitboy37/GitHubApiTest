@@ -9,6 +9,7 @@ import Foundation
 import WebKit
 
 protocol GitHubLoginPresenterProtocol: AnyObject {
+    var cancelNavigationWebView: Bool { get set }
     func createUrlRequest()
     func didCreateUrlRequest(URLRequest: URLRequest)
     func startExchangeAccessToken(with navigationResponse: WKNavigationResponse)
@@ -16,6 +17,8 @@ protocol GitHubLoginPresenterProtocol: AnyObject {
 }
 
 class GitHubLoginPresenter: GitHubLoginPresenterProtocol {
+    
+    var cancelNavigationWebView: Bool = false
     
     weak var gitHubLoginView: GitHubLoginViewProtocol?
     var router: GitHubLoginRouterProtocol

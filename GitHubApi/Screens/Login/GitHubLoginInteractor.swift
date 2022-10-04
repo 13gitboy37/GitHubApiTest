@@ -74,10 +74,11 @@ class GitHubLoginInteractor: GitHubLoginInteractorProtocol {
             case .success(let accessToken):
                 UserSession.instance.token = accessToken
                 DispatchQueue.main.async {
+                    self.presenter?.cancelNavigationWebView = true
                     self.presenter?.didExchangeAccessToken()
                 }
-                
             case .failure(let error):
+                self.presenter?.cancelNavigationWebView = false
                 print(error.localizedDescription)
             }
         }
